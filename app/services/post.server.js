@@ -1,14 +1,12 @@
-// import { mongoose } from "~/services/db.server";
+import mongoose from "mongoose";
 
-import { Post } from "./models.server";
+const postSchema = new mongoose.Schema({
+  slug: String,
+  title: String,
+  html: String,
+});
 
-// const postSchema = new mongoose.Schema({
-//   slug: String,
-//   title: String,
-//   html: String,
-// });
-
-// const Post = mongoose.model("Post", postSchema);
+const Post = mongoose.models.Post ||  mongoose.model("Post", postSchema);
 
 export async function getPosts() {
   const posts = await Post.find();

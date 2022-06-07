@@ -1,12 +1,16 @@
 import { RemixServer } from "@remix-run/react";
 import { renderToString } from "react-dom/server";
+import { connect } from "./services/db.server";
 
-export default function handleRequest(
+export default async function handleRequest(
   request,
   responseStatusCode,
   responseHeaders,
   remixContext
 ) {
+  
+  await connect()
+
   const markup = renderToString(
     <RemixServer context={remixContext} url={request.url} />
   );
